@@ -41,3 +41,19 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
   - 정규화의 과정중 핵심은 함수적 종속성을 확인하는거.
   - 현재 테이블에 있는 Key 이외의 다른 속성이 또 다른 속성들을 결정짓고 있다면 테이블을 분리하는것을 고려해야돼.
   - 제3정규화 정도가 이론적으로도 실무적으로도 적합함.
+  
+- 세팅
+  - Oracle, SQL Developer 사용.
+  - 맥에서는 Oracle 설치 못함. -> Docker 사용해서 Oracle 설치
+  - 맥 m1에서는 Docker로 oracle 컨테이너 생성 및 설치 못함
+  - 오픈 소스 컨테이너 런타임인 Colima를 사용해 oci-oracle-xe 이미지를 x86/64 환경으로 띄워서 설치
+  - 그러니까 Docker Desktop으로 컨테이너에 설치한게 아니라 Colima로 설치한거임. 다만 Docker Engine은 사용하고 있는 상태인듯.
+  - 실제로 Docker Desktop 실행해보면 컨테이너와 이미지 리스트에 oracle 안보임.
+  - SQL Developer는 쉽게 설치 가능.
+  - Oracle이 사용 가능 상태 되면, SQL developer 실행해서 oracle과 연동.
+  - SQL developer를 종료할때 commit할래 물어보는데, commit하면, 컨테이너에 데이터가 저장되는듯.
+  - 당연히 새로운 컨테이너 만들어서 다시 시작하면 해당 데이터는 없겠지.
+  - 터미널 종료 해도 컨테이너는 자동 종료 안됨. 컴 종료해야 자동 종료 되는듯?
+  - 터미널에서 docker ps -a 치면 컨테이너 리스트과 실행상태 볼 수 있음
+  - docker stop 컨테이너ID, docker start 컨테이너ID
+  - 당연히 컨테이너에서 실행중인 상태여야 sql developer에서 접속 가능해.
