@@ -57,3 +57,4 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
   - 터미널에서 docker ps -a 치면 컨테이너 리스트과 실행상태 볼 수 있음
   - docker stop 컨테이너ID, docker start 컨테이너ID
   - 당연히 컨테이너에서 실행중인 상태여야 sql developer에서 접속 가능해.
+  - [참조](https://shanepark.tistory.com/400)
