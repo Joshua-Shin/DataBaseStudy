@@ -57,6 +57,11 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
   - 터미널에서 docker ps -a 치면 컨테이너 리스트과 실행상태 볼 수 있음
   - docker stop 컨테이너ID, docker start 컨테이너ID
   - 당연히 컨테이너에서 실행중인 상태여야 sql developer에서 접속 가능해.
+  - 컴 종료 후에 다시 시작하는 법
+    - colima 시작 : colima start --memory 4 --arch x86_64
+    - 종료된 컨테이터 조회 : docker ps -a 
+    - docker start CONTAINER_ID
+    - 10초후 sql developer 실행
   - [참조](https://shanepark.tistory.com/400)
 
 - 데이터 모델링의 이해
