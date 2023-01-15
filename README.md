@@ -101,3 +101,19 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
   - FK로 조회를 많이 한다면, 해당 FK의 index 테이블을 수동으로 만드는 방법도 있어.
   - 다대다로 연결되어있을때, 이를 1대다 다대1로 풀어내기 위해 새로운 엔티티를 만들잖아 그걸 연관엔티티
   
+- SQL 기본 DML
+  - desc 테이블명
+  - select from where order by
+  - distinct 칼럼명. 중복 제거 해서 보여줌. 
+  - =, !=, and, or, not, between a and b, in(a, b), like '%석'
+  - insert
+  - insert all은 언제나 select 문과 같이 쓰이기에 맨 마지막에 껍데기 select 문을 같이 넣어줘야해.
+  - ```
+    insert into 테이블명(칼럼명1, 칼럼명2, 칼럼명3) values(칼럼1값, 칼럼2값, 칼럼3값);
+   
+    insert all into 테이블명(칼럼명1, 칼럼명2, 칼럼명3) values(칼럼1값, 칼럼2값, 칼럼3값) 
+               into 테이블명(칼럼명1, 칼럼명2, 칼럼명3) values(칼럼1값, 칼럼2값, 칼럼3값)
+    select * from dual
+    ```
+  - delete from 테이블명 where 조건문
+  - update 테이블명 set 칼럼명 = 값 where 조건문
