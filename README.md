@@ -119,8 +119,8 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
   - update 테이블명 set 칼럼명 = 값 where 조건문
 
 - SQL DDL
-  - 타입: char, varchar, number(8, 2), date
-  - drop table 테이블명 cascade constraint; 연관된 제약조건들까지 다 날려라.
+  - 타입: char(10), varchar2(10), number(8, 2), date
+  - drop table 테이블명 cascade constraints; 연관된 제약조건들까지 다 날려라.
   - ```
     create table 테이블명 (
     칼럼명1 타입 not null,
@@ -133,6 +133,7 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
     제약조건 걸때,
     그냥 칼럼 선언할때, 칼럼명1 타입 references 테이블명(PK칼럼명) 이라고 하는게 제일 깔끔. 제약조건명을 명시하고 싶다면,
     칼럼명1 타입 constraint 제약조건명 primary key 라고 해도 되고.
+  - select * from all_constraints; 하면 모든 제약조건들 확인할 수 있어.
   - FK 제약조건 옵션
     - 칼럼에다가 FK 제약조건 걸때, 뒤에 옵션 붙일 수 있어
     - (on delete, on update) + (retrict, no action, cascade, set null) 조합.
