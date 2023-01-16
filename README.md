@@ -141,6 +141,8 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
     - 참조무결성에 위배되지 않게 하기 위해 player 테이블에 있는 관련 레코드도 삭제 해버리겠다. 라는 뜻. 
     - 옵션 안붙이거나 retrict, no action은 삭제 못하게 하겠다는뜻
     - set null은 값을 null로 만들겠다는뜻
-  - 
-        
-  
+  - alter table 테이블명 add(칼럼명 타입)
+  - alter table 테이블명 drop column 칼럼명
+  - alter table 테이블명 rename column 칼럼명1 to 칼럼명2
+  - alter table 테이블명 modify (칼럼명 not null)
+    - 지금까지 입력된 값들이 문제 되지 않은 선에서 칼럼의 제약조건들을 수정할 수 있음.
