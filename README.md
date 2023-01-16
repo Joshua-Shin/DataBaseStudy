@@ -117,3 +117,30 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
     ```
   - delete from 테이블명 where 조건문
   - update 테이블명 set 칼럼명 = 값 where 조건문
+
+- SQL DDL
+  - 타입: char, varchar, number(8, 2), date
+  - drop table 테이블명 cascade constraint; 연관된 제약조건들까지 다 날려라.
+  - ```
+    create table 테이블명 (
+    칼럼명1 타입 not null,
+    칼럼명2 타입,
+    ...
+    constraint 제약조건명 primary key(칼럼명),
+    constraint 제약조건명 foreign key(칼럼명) references 테이블명(PK칼럼명)
+    );
+    ```
+    제약조건 걸때,
+    그냥 칼럼 선언할때, 칼럼명1 타입 references 테이블명(PK칼럼명) 이라고 하는게 제일 깔끔. 제약조건명을 명시하고 싶다면,
+    칼럼명1 타입 constraint 제약조건명 primary key 라고 해도 되고.
+  - FK 제약조건 옵션
+    - 칼럼에다가 FK 제약조건 걸때, 뒤에 옵션 붙일 수 있어
+    - (on delete, on update) + (retrict, no action, cascade, set null) 조합.
+    - team_id number(10) references team(team_id) on delete cascade;
+    - player 테이블에 있는 필드 team_id가 team 테이블을 참조하는 FK 인데, 만약 team 테이블의 어떤 레코드를 삭제하려 할때, 
+    - 참조무결성에 위배되지 않게 하기 위해 player 테이블에 있는 관련 레코드도 삭제 해버리겠다. 라는 뜻. 
+    - 옵션 안붙이거나 retrict, no action은 삭제 못하게 하겠다는뜻
+    - set null은 값을 null로 만들겠다는뜻
+  - 
+        
+  
