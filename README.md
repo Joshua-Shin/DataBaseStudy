@@ -147,3 +147,21 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
   - alter table 테이블명 rename column 칼럼명1 to 칼럼명2
   - alter table 테이블명 modify (칼럼명 not null)
     - 지금까지 입력된 값들이 문제 되지 않은 선에서 칼럼의 제약조건들을 수정할 수 있음.
+
+- Function
+  - Lower, upper, length, substr, concat, ||, ascii, chr, LTRIM, RTRIM, TRIM,
+  - abs, sign, celi, flood, round, trunc, power
+  - to_char : 숫자 또는 날짜를 문자열로, to_number : 문자열을 숫자로, to_date: 문자열을 날짜로
+  - extract(year from sysdate)
+  - to_char(sysdate, 'yyyy.mm.dd.hh24.mi.ss')
+  - ```
+    case
+      when position is not null then posistion
+      else '없음'
+    end as 포지션
+    ```
+  - nvl(position, '없음)
+  - nvl은 null값이 산술 연산할때 무조건적으로 null이 되어버리기에 null값이 될만한 애들을 산술연산할때 무조건적으로 적용
+  - sal * 12 + com 을 nvl(sal, 0) * 12 + nvl(com, 0) 으로.
+  - nullif, coalesce
+  
