@@ -9,6 +9,7 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
   - 개념적 설계 : ERM(=개체 관계 모델), ERD(=개체 관계 다이어그램) 만들기. R은 Relationship.
   - 논리적 설계 : Relational Model 만들기, 테이블을 만든다 생각하면 돼.
 
+
 - 개념적 설계
   - 엔티티, 관계, 속성
   - 엔티티는 물리적객체 개념적객체를 다 포함한 하나의 정보 단위. 우리나라말로 개체.
@@ -20,6 +21,7 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
   - 키 속성이 없는 개체를 약한 개체라고 함. Identifying Entity의 키 속성과 약한 개체의 키인 부분 키와 합쳐서 키 속성을 만들 수 있어.
   - 보통은 약한개체는 안만드는게 좋아
   - 상속과 비슷한 개념인데 일반화 라는게 있어.
+
 
 - 논리적 설계
   - 4가지 제약
@@ -41,7 +43,8 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
   - 정규화의 과정중 핵심은 함수적 종속성을 확인하는거.
   - 현재 테이블에 있는 Key 이외의 다른 속성이 또 다른 속성들을 결정짓고 있다면 테이블을 분리하는것을 고려해야돼.
   - 제3정규화 정도가 이론적으로도 실무적으로도 적합함.
-  
+
+
 - 세팅
   - Oracle, SQL Developer 사용.
   - 맥에서는 Oracle 설치 못함. -> Docker 사용해서 Oracle 설치
@@ -64,6 +67,7 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
     - 10초후 sql developer 실행
   - [참조](https://shanepark.tistory.com/400)
 
+
 - 데이터 모델링의 이해
   - 이론에서는 개념적 설계는 ERD 그리는거고, 논리적 설계는 스키마 및 테이블을 만드는거였는데,
   - 실무에서는 개념적 설계나 논리적 설계의 구분이 좀 모호하고, 물리적 설계 단계에서 테이블을 만들게 됨
@@ -80,6 +84,7 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
   - 다만, 이럴 경우 조회할때 조인을 많이 해서 성능의 이슈가 생길 수도 있어
   - 물론, 식별자 관계로만 이어가면 식별자가 composite으로 계속 쌓이고 쌓여서 이것도 문제가 생길 수 있고.
   - 실무에서는 다대다 관계는 무조건 새로운 테이블 만들어서 푸는듯
+
 
 - 데이터 모델과 성능
   - 정규화 반정규화
@@ -100,7 +105,8 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
   - 따라서, 조회를 많이 하는 애를 composite key중 위로 두는게 좋아
   - FK로 조회를 많이 한다면, 해당 FK의 index 테이블을 수동으로 만드는 방법도 있어.
   - 다대다로 연결되어있을때, 이를 1대다 다대1로 풀어내기 위해 새로운 엔티티를 만들잖아 그걸 연관엔티티
-  
+
+
 - SQL 기본 DML
   - desc 테이블명
   - select from where order by
@@ -117,6 +123,7 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
     ```
   - delete from 테이블명 where 조건문
   - update 테이블명 set 칼럼명 = 값 where 조건문
+
 
 - SQL DDL
   - 타입: char(10), varchar2(10), number(8, 2), date
@@ -148,6 +155,7 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
   - alter table 테이블명 modify (칼럼명 not null)
     - 지금까지 입력된 값들이 문제 되지 않은 선에서 칼럼의 제약조건들을 수정할 수 있음.
 
+
 - Function
   - Lower, upper, length, substr, concat, ||, ascii, chr, LTRIM, RTRIM, TRIM,
   - abs, sign, celi, flood, round, trunc, power
@@ -165,3 +173,34 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
   - sal * 12 + com 을 nvl(sal, 0) * 12 + nvl(com, 0) 으로.
   - nullif, coalesce
   
+
+- TCL
+  - 트랜잭션 : 논리적 최소 단위
+  - 트랜잭션 특성 4가지 ACID
+  - Atomicity : 원자성. 트랜잭션에 있는 모든 연산이 성공하든지 아니면 다 실패 하든지. all or nothing
+  - Consistency: 지속성. 트랜잭션 시작전에 문제가 없었다면, 올바르게 마친후에도 문제가 없어야 한다.
+  - Isolation: 고립성. 트랜잭션 도중에 다른 트랜잭션이 끼어들 수 없음.
+  - Durability : 영구성. commit 되면, DB에 영구히 저장.
+  - commit, rollback, savepoint
+
+- DCL
+  - create user myid identified by myps;
+  - alter user myid identified by newps;
+  - grant create user to myid;
+  - revoke create user from myid;
+  - drop user myid cascade;
+  - myid에 있는 player 테이블을 newid가 조회할 수 있는 권한을 주고 싶을때
+  - admin 계정으로 로그인 한 상태라면, grant select on myid.player to newid;
+  - myid 계정으로 로그인 한 상태라면, grant select on player to newid;
+  - 권한들을 role에 묶어서 해당 role만 grant 하면 편리함.
+  - 이미 DB에서 만들어놓은 role들이 있고, 그 중 connect, resource, dba 등이 있어.
+  - 그래서 시작할때 admin 계정으로 로그인한후 해당 롤들을 새로 생성한 계정으로 준거야.
+  - 해당 롤에는 create session, create table 과 같이 당연히 있어야 하는 권한들을 포함 여러가지가 있으며 dba는 관리자 권한과 비슷.
+
+
+
+
+
+
+
+
