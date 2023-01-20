@@ -253,7 +253,7 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
     
   - 부서별로 최고 급여를 받는 사원의 사원명, 부서번호, 급여를 출력하여라
   - <details>
-    <summary>정답1</summary>
+    <summary>연관 서브쿼리를 활용한 정답</summary>
     
     ```
     select ename, deptno, sal
