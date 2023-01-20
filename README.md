@@ -198,6 +198,25 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
   - 해당 롤에는 create session, create table 과 같이 당연히 있어야 하는 권한들을 포함 여러가지가 있으며 dba는 관리자 권한과 비슷.
 
 
+- Join
+  - equi join, no equi join : '='가 있냐 없냐
+  - 명시적 조인, 암시적 조인 : join 키워드가 있냐 없냐
+  - inner join, natural join, using,, 
+  - outter join : left join, right join, full join.
+  - cross join
+  - self join. 
+    - 계층형 질의. start with mgr is null connect by prior 자식 = 부모.
+  - ```
+    select *
+    from player p join team t
+    on p.team_id = t.team_id
+    where p.age >= 18
+    order by p.age;
+    ```
+    이게 표준이고 이게 제일 많이 쓰이고, 조인 조건과 where 조건문을 구분해서 보기도 좋아.
+  
+- Set Operation
+  - union, union all, intersect, minus(oracle에서만)
 
 
 
