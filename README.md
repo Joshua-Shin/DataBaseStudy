@@ -220,6 +220,84 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
   - order by는 첫번째 select 문에 명시한 칼럼으로만 선택할 할 수 있으며, 해당 칼럼이 별칭을 지정했을 경우, 별칭이 아닌 원 칼럼 이름을 쓸 경우 오류 발생.
 
 
+- Sub query
+  - 단일행 서브트리, 다중행 서브트리. 단일열 서브터리, 다중열 서브트리.
+  - 다중행 서브트리에다가 단일행 연산자(=, <, >) 사용하면 안되고,
+  - 단일행 서브트레아다가 다중행 연산자(in, all, ans/some, exists)는 사용할 수는 있지만, 안사용하는게 좋고.
+  - view : 가상 테이블. 실제 데이터를 저장하는게 아니라, sql문을 text로 저장해뒀다가, view를 사용하면 그 저장된 sql문을 쏴주는거임.
+  - view 장점 
+    - 독립성 : 애플리케이션이 테이블을 직접 접근하지 않고 view를 접근하게 해놓은 상태인데, 테이블 구조를 바꾼다면, 애플리케이션을 수정하지 않고 view만 수정하면 돼
+    - 편리성 : 보기 깔끔해
+    - 보안성 : DB 테이블을 넘기는것보다 보여주지 말아야할것은 걸러서 view 담아서 view를 넘겨주면 보안에 좋겠지.
+  - create view 해서 저장해놓은 뷰를 정적뷰. 그냥 from 절에다가 서브쿼리 처럼 사용하면 그 sql문 쓰고 사라지기에 동적뷰라 함.
+  - 신장이 가장 큰 선수의 정보 조회하여라.
+  - <details>
+    <summary>정답</summary>
 
+    ```
+    select player_name, height 
+    from player 
+    where height = (select max(height) from player);
+    ```
+    </details>
+  - 사번 7499인 직원의 매니져를 사번 7369인 직원의 매니져로 변경하여라.
+  - <details>
+    <summary>정답</summary>
+    
+    ```
+    update emp 
+    set mgr = (select mgr from emp where empno = 7369)
+    where empno = 7499;
+    ```
+    </details>
+    
+  - 부서별로 최고 급여를 받는 사원의 사원명, 부서번호, 급여를 출력하여라
+  - <details>
+    <summary>정답1</summary>
+    
+    ```
+    select ename, deptno, sal
+    from emp m
+    where sal = (select max(s.sal)
+                    from emp s
+                    where m.deptno = s.deptno);
+    ```
+    </details>
+    <details>
+    <summary>group by를 활용한 정답</summary>
+    
+    ```
+    select ename, deptno, sal
+    from emp
+    where (deptno, sal) in (select deptno, max(sal)
+                            from emp
+                            group by deptno);
+    ```
+    </details>  
+  - 부서의 평균 급여보다 더 높은 급여를 받는 사람의 이름과, 급여와, 부서 평균 급여를 출력하라
+  - <details>
+    <summary>정답</summary>
+    
+    ```
+    select ename, sal
+    from emp m
+    where sal > (select avg(sal) 
+                from emp s 
+                where m.deptno = s.deptno);
+    ```
+    - 얘는 위의 문제 처럼 Group by를 사용할 수 없는데, group by를 활용한 서브 쿼리의 경우 다중행 서브쿼리가 되며, 다중행 연산자중 이상을 표현할 수 있는 연산자가 없음.
+    - 그래도 이해가 안간다면 그룹바이로 만든다음에 서브쿼리 찍어봐.
+    </details>
+  - 사원과 부서 테이블로부터 사원번호, 사원명, 부서번호, 부서명을 추출한 뷰 V_EMP_DEPT를 작성하시오.
+  - <details>
+    <summary>정답</summary>
+    
+    ```
+    create view V_EMP_DEPT as
+    select empno, ename, dept.deptno, dept.dname
+    from emp JOIN dept
+    on emp.deptno = dept.deptno;
+    ```
+    </details>
 
 
