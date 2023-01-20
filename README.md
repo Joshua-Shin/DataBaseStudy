@@ -217,7 +217,7 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
   
 - Set Operation
   - union, union all, intersect, minus(oracle에서만)
-
+  - order by는 첫번째 select 문에 명시한 칼럼으로만 선택할 할 수 있으며, 해당 칼럼이 별칭을 지정했을 경우, 별칭이 아닌 원 칼럼 이름을 쓸 경우 오류 발생.
 
 
 
