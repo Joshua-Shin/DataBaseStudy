@@ -306,7 +306,49 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
   - group by로 그룹화 한것에 대해 집계를 내릴 수 있어.
   - 연산할때 null 포함안되고, 특히 avg 구할때 분모로 안들어감
   - group by 절이 없지만 select 문에 집계 함수가 들어간다는것은 from에 명시된 테이블을 하나의 그룹으로 본다는 의미로 해석해도 될듯
-  - 실행 순서 및 프로세스
-    - ㄴ
-  - 실행 순서 및 프로세
-
+  - **실행 순서 및 프로세스**
+    - from : 테이블 선택
+    - where : 조건에 알맞는 행들만 선택
+    - group by : 행 그룹화
+    - having : 조건에 알맞는 그룹들만 선택
+    - select : 칼럼별로 연산이 필요할 시 연산
+    - order by : 선택된 데이터들을 정렬
+  - Q 포지션별 키의 평균을 출력하되, 해당 포지션의 키의 최대값이 190cm 이상인 경우에만 출력
+  - <details>
+    <summary>정답</summary>
+    
+    ```
+    select round(avg(height), 2) 포지셔별평균키
+    from player
+    group by position
+    having max(height) >= 190;
+    ```
+  - Q 부서이름, 직무, 부서의 직무별 직원수, 부서의 직무별 급여합을 출력하라.
+  - <details>
+    <summary>정답</summary>
+    
+    ```
+    select dname, job, count(*) 직원수, sum(sal) 급여합
+    from emp join dept
+    on emp.deptno = dept.deptno
+    group by dept.dname, emp.job;
+    ```
+  - Q 키가 가장 작은 3명의 선수를 출력하라.
+  - <details>
+    <summary>정답</summary>
+    
+    ```
+    select player_name, height, rownum, orgno
+    from (select player_name, height, rownum as orgno from player order by height)
+    where rownum < 4;
+    ```
+  - Q 키가 가장 큰 3명의 선수를 출력하라.
+  - <details>
+    <summary>정답</summary>
+    
+    ```
+    select player_name, height, rownum, orgno
+    from (select player_name, height, rownum as orgno from player where height is not null order by height desc)
+    where rownum < 4;
+    ```
+  -
