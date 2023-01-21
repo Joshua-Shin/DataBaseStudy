@@ -301,3 +301,12 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
     </details>
 
 
+- Multi-Row Function
+  - 집계 함수 : sum, avg, count, max, min
+  - group by로 그룹화 한것에 대해 집계를 내릴 수 있어.
+  - 연산할때 null 포함안되고, 특히 avg 구할때 분모로 안들어감
+  - group by 절이 없지만 select 문에 집계 함수가 들어간다는것은 from에 명시된 테이블을 하나의 그룹으로 본다는 의미로 해석해도 될듯
+  - 실행 순서 및 프로세스
+    - ㄴ
+  - 실행 순서 및 프로세
+
