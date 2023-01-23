@@ -230,8 +230,8 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
     - 편리성 : 보기 깔끔해
     - 보안성 : DB 테이블을 넘기는것보다 보여주지 말아야할것은 걸러서 view 담아서 view를 넘겨주면 보안에 좋겠지.
   - create view 해서 저장해놓은 뷰를 정적뷰. 그냥 from 절에다가 서브쿼리 처럼 사용하면 그 sql문 쓰고 사라지기에 동적뷰라 함.
-  - 신장이 가장 큰 선수의 정보 조회하여라.
-  - <details>
+  - Q. 신장이 가장 큰 선수의 정보 조회하여라.
+    <details>
     <summary>정답</summary>
 
     ```
@@ -240,8 +240,8 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
     where height = (select max(height) from player);
     ```
     </details>
-  - 사번 7499인 직원의 매니져를 사번 7369인 직원의 매니져로 변경하여라.
-  - <details>
+  - Q. 사번 7499인 직원의 매니져를 사번 7369인 직원의 매니져로 변경하여라.
+    <details>
     <summary>정답</summary>
     
     ```
@@ -251,8 +251,8 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
     ```
     </details>
     
-  - 부서별로 최고 급여를 받는 사원의 사원명, 부서번호, 급여를 출력하여라
-  - <details>
+  - Q. 부서별로 최고 급여를 받는 사원의 사원명, 부서번호, 급여를 출력하여라
+    <details>
     <summary>연관 서브쿼리를 활용한 정답</summary>
     
     ```
@@ -274,8 +274,8 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
                             group by deptno);
     ```
     </details>  
-  - 부서의 평균 급여보다 더 높은 급여를 받는 사람의 이름과 급여를 출력하라
-  - <details>
+  - Q. 부서의 평균 급여보다 더 높은 급여를 받는 사람의 이름과 급여를 출력하라
+    <details>
     <summary>정답</summary>
     
     ```
@@ -288,8 +288,8 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
     - 얘는 위의 문제 처럼 Group by를 사용할 수 없는데, group by를 활용한 서브 쿼리의 경우 다중행 서브쿼리가 되며, 다중행 연산자중 이상을 표현할 수 있는 연산자가 없음.
     - 그래도 이해가 안간다면 그룹바이로 만든다음에 서브쿼리 찍어봐.
     </details>
-  - 사원과 부서 테이블로부터 사원번호, 사원명, 부서번호, 부서명을 추출한 뷰 V_EMP_DEPT를 작성하시오.
-  - <details>
+  - Q. 사원과 부서 테이블로부터 사원번호, 사원명, 부서번호, 부서명을 추출한 뷰 V_EMP_DEPT를 작성하시오.
+    <details>
     <summary>정답</summary>
     
     ```
@@ -313,8 +313,8 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
     - having : 조건에 알맞는 그룹들만 선택
     - select : 칼럼별로 연산이 필요할 시 연산
     - order by : 선택된 데이터들을 정렬
-  - Q 포지션별 키의 평균을 출력하되, 해당 포지션의 키의 최대값이 190cm 이상인 경우에만 출력
-  - <details>
+  - Q. 포지션별 키의 평균을 출력하되, 해당 포지션의 키의 최대값이 190cm 이상인 경우에만 출력
+    <details>
     <summary>정답</summary>
     
     ```
@@ -323,8 +323,8 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
     group by position
     having max(height) >= 190;
     ```
-  - Q 부서이름, 직무, 부서의 직무별 직원수, 부서의 직무별 급여합을 출력하라.
-  - <details>
+  - Q. 부서이름, 직무, 부서의 직무별 직원수, 부서의 직무별 급여합을 출력하라.
+    <details>
     <summary>정답</summary>
     
     ```
@@ -333,8 +333,8 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
     on emp.deptno = dept.deptno
     group by dept.dname, emp.job;
     ```
-  - Q 키가 가장 작은 3명의 선수를 출력하라.
-  - <details>
+  - Q. 키가 가장 작은 3명의 선수를 출력하라.
+    <details>
     <summary>정답</summary>
     
     ```
@@ -342,8 +342,8 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
     from (select player_name, height, rownum as orgno from player order by height)
     where rownum < 4;
     ```
-  - Q 키가 가장 큰 3명의 선수를 출력하라.
-  - <details>
+  - Q. 키가 가장 큰 3명의 선수를 출력하라.
+    <details>
     <summary>정답</summary>
     
     ```
@@ -351,15 +351,65 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
     from (select player_name, height, rownum as orgno from player where height is not null order by height desc)
     where rownum < 4;
     ```
-  -
+  
 
 
 - Multi-Row Function
-  - 집계 함수 : rollup, cube, grouping sets, grouping, [partition by 절][order by 절][windowing 절]
-    - rollup(칼럼1, 칼럼2) : 칼럼1+칼럼2 그룹핑 집계, 칼럼1 그룹핑 집계, 전체 그룹핑 집계
-    - cube(칼럼1, 칼럼2) : 칼럼1 그룹핑 집계, 칼럼2 그룹핑 집계, 칼럼1+칼럼2 그룹핑 집계, 전체 집계 == 모든 조합에 따라 그룹핑해서 집계
+  - 집계 함수 : rollup, cube, grouping sets + over [partition by 절][order by 절][windowing 절]
+    - rollup(칼럼1, 칼럼2) : 칼럼1 그룹핑 집계, 칼럼1+칼럼2 그룹핑 집계, 전체 그룹핑 집계
+    - cube(칼럼1, 칼럼2) : 칼럼1 그룹핑 집계, 칼럼2 그룹핑 집계, 칼럼1+칼럼2 그룹핑 집계, 전체 집계 // 모든 조합에 따라 그룹핑해서 집계
     - grouping sets(칼럼1, 칼럼2) : 칼럼1 그룹핑 집계, 칼럼2 그룹핑 집계
+    - 주의점 : partition by, order by, windowing 절 사이사이에 습관적으로 ',' 찍지마! 
     - grouping(칼럼) : 해당 칼럼이 그룹핑된 집계값을 나타낸 행이라면 숫자1, 아니라면 0표시. 이걸 통해 case문 작성해서 null값으로 나오는걸 조금 더 깔끔하게 표현할 수 있어.
+  - rank(), dense_rank(), row_number()
   - windowing 절 : rows between 1 preceding and 1 following;, range between 50 preceding and 150 following;, range unbounded preceding;
   - 행 순서 윈도우 함수 : first_value, last_value, lag, lead
-  - 비율 윈도우 함수
+  - 비율 윈도우 함수 : ratio_to_report, percent_rank, cume_dist, ntile
+  - Q. 부서이름, 직무, 부서의 직무별 직원수, 부서의 직무별 급여합을 구하여라
+    <details>
+    <summary>정답</summary>
+    
+    ```
+    select dname, job, count(*) 직원수, sum(sal) 급여합
+    from emp join dept
+    on emp.deptno = dept.deptno
+    group by rollup(dname, job)
+    order by dname, job;
+    ```
+  - Q. Job, ename, sal, 전체 급여 순위, JOB 내에서의 급여 순위를 출력하라
+    <details>
+    <summary>정답</summary>
+    
+    ```
+    select job, ename, sal, rank() over (partition by job order by sal desc) as JOB에서의_순위, rank() over (order by sal desc) as 전체급여순위
+    from emp
+    order by sal desc;
+    ```
+  - Q. 각 직원이 속한 집업 내에서 급여의 최대값을 함께 출력하라
+    <details>
+    <summary>정답</summary>
+    
+    ```
+    select job, ename, sal, max(sal) over (partition by job) job_max
+    from emp
+    order by job, ename;
+    ```
+  - Q. job = "saleman"인 모든 직원에 대해서, 급여 기준 본인 바로 윗 사람의 급여와 아랫사람의 급여를 출력하는 질의를 완성하시오. 없다면 0으로 채우고.
+    <details>
+    <summary>정답</summary>
+    
+    ```
+    select ename, sal,
+        lag(sal, 1, 0) over (order by sal desc) as 윗사람급여, lead(sal, 1, 0) over (order by sal desc) as 아랫사람급여
+    from emp
+    where job = 'SALESMAN';
+    ```
+  - Q. 전체 사원을 급여 순으로 정렬하고, 급여 기준 4개의 그룹으로 분리하는 질의를 자성하시오.
+    <details>
+    <summary>정답</summary>
+    
+    ```
+    select ename, sal, ntile(4) over (order by sal desc)
+    from emp
+    order by sal desc;
+    ```
