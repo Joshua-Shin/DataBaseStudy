@@ -352,3 +352,14 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
     where rownum < 4;
     ```
   -
+
+
+- Multi-Row Function
+  - 집계 함수 : rollup, cube, grouping sets, grouping, [partition by 절][order by 절][windowing 절]
+    - rollup(칼럼1, 칼럼2) : 칼럼1+칼럼2 그룹핑 집계, 칼럼1 그룹핑 집계, 전체 그룹핑 집계
+    - cube(칼럼1, 칼럼2) : 칼럼1 그룹핑 집계, 칼럼2 그룹핑 집계, 칼럼1+칼럼2 그룹핑 집계, 전체 집계 == 모든 조합에 따라 그룹핑해서 집계
+    - grouping sets(칼럼1, 칼럼2) : 칼럼1 그룹핑 집계, 칼럼2 그룹핑 집계
+    - grouping(칼럼) : 해당 칼럼이 그룹핑된 집계값을 나타낸 행이라면 숫자1, 아니라면 0표시. 이걸 통해 case문 작성해서 null값으로 나오는걸 조금 더 깔끔하게 표현할 수 있어.
+  - windowing 절 : rows between 1 preceding and 1 following;, range between 50 preceding and 150 following;, range unbounded preceding;
+  - 행 순서 윈도우 함수 : first_value, last_value, lag, lead
+  - 비율 윈도우 함수
