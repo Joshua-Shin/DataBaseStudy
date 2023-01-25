@@ -112,15 +112,19 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
   - select from where order by
   - distinct 칼럼명. 중복 제거 해서 보여줌. 
   - =, !=, and, or, not, between a and b, in(a, b), like '%석'
-  - insert
-  - insert all은 언제나 select 문과 같이 쓰이기에 맨 마지막에 껍데기 select 문을 같이 넣어줘야해.
-  - ```
-    insert into 테이블명(칼럼명1, 칼럼명2, 칼럼명3) values(칼럼1값, 칼럼2값, 칼럼3값);
-   
-    insert all into 테이블명(칼럼명1, 칼럼명2, 칼럼명3) values(칼럼1값, 칼럼2값, 칼럼3값) 
-               into 테이블명(칼럼명1, 칼럼명2, 칼럼명3) values(칼럼1값, 칼럼2값, 칼럼3값)
-    select * from dual
-    ```
+  - insert : 테이블에다가 새로운 행을 넣는거.
+    - insert all은 언제나 select 문과 같이 쓰이기에 맨 마지막에 껍데기 select 문을 같이 넣어줘야해.
+    - ```
+      insert into 테이블명(칼럼명1, 칼럼명2, 칼럼명3) values(칼럼1값, 칼럼2값, 칼럼3값);
+
+      insert all into 테이블명(칼럼명1, 칼럼명2, 칼럼명3) values(칼럼1값, 칼럼2값, 칼럼3값) 
+                 into 테이블명(칼럼명1, 칼럼명2, 칼럼명3) values(칼럼1값, 칼럼2값, 칼럼3값)
+      select * from dual
+      ```
+    - insert into 테이블명1(칼럼명1, 칼럼명2, 칼럼명3) select 칼럼명1, 칼럼명2, 칼럼명3 from 테이블명2;
+      - 테이블2의 칼럼1,2,3을 테이블1의 칼럼1,2,3으로 삽입함
+    - insert into 테이블1 select * from 테이블2;
+      - 테이블2 전체를 테이블1로 복사
   - delete from 테이블명 where 조건문
   - update 테이블명 set 칼럼명 = 값 where 조건문
 
