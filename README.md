@@ -189,7 +189,8 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
   - sal * 12 + com 을 nvl(sal, 0) * 12 + nvl(com, 0) 으로.
   - nullif(A, B) : 두개 값이 같으면 null, 다르면 A 반환
   - COALESCE(a1, a2, a3, a4,... aN) :a1 부터 aN까지 첫음으로 null 이 아닌 값을 리턴, 모든 값이 null 이면 null 리턴
-  
+  - Q. PLAYER 테이블에서 PLAYER_NAME의 맨 마지막 문자를 ‘*’로 대체한 ‘비식별화’ 칼럼을 출력하시오. (concat, subsrt, length)
+  - Q. PLAYER 테이블에서 PLAYER_ID를 활용하여 전체 선수를 4개의 그룹(0 ~ 3)에 배정하시오. (mod)
 
 - TCL
   - 트랜잭션 : 논리적 최소 단위
