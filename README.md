@@ -219,7 +219,8 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
 - Join
   - equi join, no equi join : '='가 있냐 없냐
   - 명시적 조인, 암시적 조인 : join 키워드가 있냐 없냐
-  - inner join, ~~natural join(= 두 테이블에서 동일한 이름을 갖는 모든 컬럼들을 equi join 해버림), using(= on절에 '=' 대신 쓰는 방식) ~~
+  - inner join, natural join(= 두 테이블에서 동일한 이름을 갖는 모든 컬럼들을 equi join 해버림), using(= on절에 '=' 대신 쓰는 방식)
+  - using 쓸때 유의점 : using (deptno) 처럼 괄호로 묶어줘야함. 묶었다면, select에서 s.deptno 라고 하면 안되고 그냥 deptno라 해줘야함.
   - outter join : left join, right join, full join.
   - cross join
   - self join
