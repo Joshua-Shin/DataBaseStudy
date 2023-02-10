@@ -168,8 +168,13 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
 
 
 - Function
-  - Lower, upper, length, substr, concat, ||, ascii, chr, LTRIM, RTRIM, TRIM,
+  - Lower, upper, length, substr, concat, ||, ascii, chr
   - abs, sign, celi, flood, round, trunc, power
+  - trim(' abc ') => 'abc'
+  - ltrim(' abc ') => 'abc '
+  - ltrim('aabbcc', 'a') => 'bbcc'
+  - rtrim(' abc ') => ' abc'
+  - rtrim('aabbcc', 'c') => 'aabb'
   - to_char : 숫자 또는 날짜를 문자열로, to_number : 문자열을 숫자로, to_date: 문자열을 날짜로
   - extract(year from sysdate)
   - to_char(sysdate, 'yyyy.mm.dd.hh24.mi.ss')
@@ -214,11 +219,10 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
 - Join
   - equi join, no equi join : '='가 있냐 없냐
   - 명시적 조인, 암시적 조인 : join 키워드가 있냐 없냐
-  - inner join, natural join, using,, 
+  - inner join, ~~natural join(= 두 테이블에서 동일한 이름을 갖는 모든 컬럼들을 equi join 해버림), using(= on절에 '=' 대신 쓰는 방식) ~~
   - outter join : left join, right join, full join.
   - cross join
-  - self join. 
-    - 계층형 질의. start with mgr is null connect by prior 자식 = 부모.
+  - self join
   - ```
     select *
     from player p join team t
@@ -228,8 +232,23 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
     ```
     이게 표준이고 이게 제일 많이 쓰이고, 조인 조건과 where 조건문을 구분해서 보기도 좋아.
   - on은 조인 조건문을 명시하는곳이야. 어떠한 공통의 값으로 조인을 할지만 쓰는게 아니라, 필터링 조건도 걸 수 있어. 
-  - 조건문을 on에다 쓸 경우 일단 필터링을 한 다음 조인을 하겠지만, on에 안쓰고 where에다가 조건문을 쓰면, 조인된 결과물을 가지고 where에서 거르는것이기때문에,
-  - 되도록 join 조건은 on에다가 쓰는게 낫지 않을까.
+  - 조건문을 on에다 쓸 경우 일단 필터링을 한 다음 조인을 하겠지만, on에 안쓰고 where에다가 조건문을 쓰면, 조인된 결과물을 가지고 where에서 거르는것이기때문에, 되도록 join 조건은 on에다가 쓰는게 낫지 않을까.
+  - ~~계층형 질의~~
+    - ~~순환관계 데이터 모델(사원, 관리자가 주어졌을때 셀프 조인을 할 수 있는 데이터)의 경우 계층형 구조를 갖게 됨.~~
+    - ~~즉 동일한 테이블에 관리자의 관리자의 관리자의 관리자로 위로 올라가면 대빵이 있는것처럼, 상위 하위 데이터가 존재하는 계층형 구조가 있어.~~
+    - ~~이러한 상황에 조금 더 쉽게 다루기 위한 특수한 질의가 있는데. start with, connect by 이런 키워드로 하는게 있긴한데, 일단 보류.~~
+  - Q. emp 테이블로부터 사원의 사번과 이름, 그리고 매니저의 사번과 이름을 출력, 단 매니저가 없는 사원의 정보도 출력
+        <details>
+        <summary>정답</summary>
+
+        ```
+        select e.empno, e.ename, m.empno, m.ename
+        from emp e left join emp m
+        on e.mgr = m.empno;
+        ```
+        </details>
+  
+  
   
 - Set Operation
   - union, union all, intersect, minus(oracle에서만)
