@@ -485,3 +485,9 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
       
       
 - [정처기 공부할때 추가로 정리한거](https://github.com/Joshua-Shin/JungchugiSummary/blob/main/README.md#3%EA%B3%BC%EB%AA%A9-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EA%B5%AC%EC%B6%95)
+
+- 클로즈 북 SQL 코테 준비용으로 외워야 할부분
+  - offset 10 rows fetch next 10 rows only;
+  - not in : not exists랑 null을 대하는 로직이 다른데, id값은 어차피 null이 아니게 주여지니까 그냥 사용해도 상관 없음
+  - to_date('2022-02-01', 'yyyy-mm-dd')
+  - to_char(date, 'yyyy-mm-dd')
