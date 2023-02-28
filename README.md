@@ -487,10 +487,14 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
       
 - [정처기 공부할때 추가로 정리한거](https://github.com/Joshua-Shin/JungchugiSummary/blob/main/README.md#3%EA%B3%BC%EB%AA%A9-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EA%B5%AC%EC%B6%95)
 
-- 클로즈 북 SQL 코테 보기전에 주의할점
+- SQL 코테 보기전에 주의할점
   - 컴파일러 언어 설정이 oracle인지 mysql인지 확실히 확인!
   - 클로즈 북이면 일단 외워
     - offset 10 rows fetch next 10 rows only;
     - not in : not exists랑 null을 대하는 로직이 다른데, id값은 어차피 null이 아니게 주여지니까 그냥 사용해도 상관 없음
     - to_date('2022-02-01', 'yyyy-mm-dd')
     - to_char(date, 'yyyy-mm-dd')
+  - Q. 문자열이 알파벳+숫자로 구성되어있다. 숫자부분을 4자리 숫자보다 적을 경우 앞에 0을 붙여 4자리를 완성하여 최종 문자열을 출력하라. 
+    - 예) asdfqwer123 -> asdfqwer0123, asdfqwer12 -> asdfqwer0012
+    - A. select regexp_replace(name, '[^a-zA-Z]') || lpad(regexp_replace(name, '[^0-9]'), 4, '0') from table;
+      - lpad(문자열, 전체길이, 채울문자) : 문자열이 전체 길이에 부족한 만큼 왼쪽에 채울문자를 채워줌.
