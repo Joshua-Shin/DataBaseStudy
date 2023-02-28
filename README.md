@@ -169,6 +169,7 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
 
 - Function
   - Lower, upper, length, substr, concat, ||, ascii, chr
+  - substr("문자열", "시작위치", "길이") : 시작위치는 1부터 시작.
   - abs, sign, celi, flood, round, trunc, power
   - trim(' abc ') => 'abc'
   - ltrim(' abc ') => 'abc '
