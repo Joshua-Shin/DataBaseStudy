@@ -219,23 +219,37 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
 
 
 - Join
-  - equi join, no equi join : '='가 있냐 없냐
-  - 명시적 조인, 암시적 조인 : join 키워드가 있냐 없냐
-  - inner join, natural join(= 두 테이블에서 동일한 이름을 갖는 모든 컬럼들을 equi join 해버림), using(= on절에 '=' 대신 쓰는 방식)
-  - using 쓸때 유의점 : using (deptno) 처럼 괄호로 묶어줘야함. 묶었다면, select에서 s.deptno 라고 하면 안되고 그냥 deptno라 해줘야함.
-  - outter join : left join, right join, full join.
-  - cross join
-  - self join
-  - ```
-    select *
-    from player p join team t
-    on p.team_id = t.team_id
-    where p.age >= 18
-    order by p.age;
-    ```
-    이게 표준이고 이게 제일 많이 쓰이고, 조인 조건과 where 조건문을 구분해서 보기도 좋아.
-  - on은 조인 조건문을 명시하는곳이야. 어떠한 공통의 값으로 조인을 할지만 쓰는게 아니라, 필터링 조건도 걸 수 있어. 
-  - 조건문을 on에다 쓸 경우 일단 필터링을 한 다음 조인을 하겠지만, on에 안쓰고 where에다가 조건문을 쓰면, 조인된 결과물을 가지고 where에서 거르는것이기때문에, 되도록 join 조건은 on에다가 쓰는게 낫지 않을까.
+  - 순수 관계 연산 : select, project, divide, join
+    - select의 개념은 where절에서
+    - project의 개념은 select절에서
+    - divide는 이제 안쓰는 개념
+    - join은 처음에 natural join만 제안됐는데, 여기에서 이것저것 발전되어서 다양한 join이 생김
+  - Join
+    - equi join, no equi join : '='가 있냐 없냐
+    - 명시적 조인, 암시적 조인 : join 키워드가 있냐 없냐
+    - inner Join
+      - inner join : 조건절에 부합하는 애들만을 연결해줌. 
+        - 따로 조건을 명시하지 않을 경우, 두 테이블이 교차조인이 되어버림. 모조리 교차조인된 애들중에 조건절로 선택한 결과가 inner join이라 생각해도 될듯
+      - natural join : 두 테이블에서 동일한 이름과 동일한 데이터 타입을을 갖는 모든 컬럼들을 equi join 해버림
+        - 따로 조건을 명시할 수 없고, 조인의 대상이 되는 칼럼에 테이블명이나 별칭을 접두사로 명시할 수 없음.
+      - using : inner join와 natural join의 중간 형태 느낌인데. 조건을 따로 명시하지만, 접두사로 조건의 컬럼명을 명시할 수 없음. 괄호 필수.
+    - outter join : 조건에 부합하지 않아 두 테이블에 동시에 대응되지 않은 칼럼들도 빼버리지 않고 대응되지 않는 속성값을 null로 표시하여 나타냄.
+      - left join, right join, full join
+    - cross join
+    - self join : 동일한 테이블 내에서 자기가 자기 테이블을 조인함. 테이블 식별을 위해 별칭을 반드시 사용.
+    - 조인 개념 확인 핵심 문제 <br> <img width="1440" alt="스크린샷 2023-03-17 오후 5 02 11" src="https://user-images.githubusercontent.com/93418349/225863246-1dc16ee5-bee8-47bc-a966-f6b5cf817df2.png">
+    - 답: 3개, 12개, 4개, 4개, 5개
+    - ```
+      select *
+      from player p join team t
+      on p.team_id = t.team_id
+      where p.age >= 18
+      order by p.age;
+      ```
+      이게 표준이고 이게 제일 많이 쓰이고, 조인 조건과 where 조건문을 구분해서 보기도 좋아.
+    - on은 조인 조건문을 명시하는곳이야. 어떠한 공통의 값으로 조인을 할지만 쓰는게 아니라, 필터링 조건도 걸 수 있어. 
+    - 조건문을 on에다 쓸 경우 일단 필터링을 한 다음 조인을 하겠지만, on에 안쓰고 where에다가 조건문을 쓰면, 조인된 결과물을 가지고 where에서 거르는것이기때문에, 되도록 join 조건은 on에다가 쓰는게 낫지 않을까.
+  
   - ~~계층형 질의~~
     - ~~순환관계 데이터 모델(사원, 관리자가 주어졌을때 셀프 조인을 할 수 있는 데이터)의 경우 계층형 구조를 갖게 됨.~~
     - ~~즉 동일한 테이블에 관리자의 관리자의 관리자의 관리자로 위로 올라가면 대빵이 있는것처럼, 상위 하위 데이터가 존재하는 계층형 구조가 있어.~~
@@ -251,12 +265,14 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
         ```
         </details>
   
-  
-  
 - Set Operation
-  - union, union all, intersect, minus(oracle에서만)
-  - order by는 첫번째 select 문에 명시한 칼럼으로만 선택할 할 수 있으며, 해당 칼럼이 별칭을 지정했을 경우, 별칭이 아닌 원 칼럼 이름을 쓸 경우 오류 발생.
-
+  - 일반 집합 연산 : union, intersect, minus(except), product
+    - 합집합, 교집합, 차집합, 곱집합
+  - union은 합집합, union all은 합집합의 개념이 아니라 그냥 다 더함.
+  - 집합 연산을 위해서는 두개의 select절의 데이터 타입이 상호 호환 되어야 돼. 반드시 동일한 데이터 타입이여야 한다는 의미가 아니야.
+  - union all을 제외하고는, 집합 연산이 이루어질때 각 테이블 내에서 중복이 되는 행들을 제거하고 연산이 일어남. 연산이 일어나고 중복행들을 제거하는 걸수도 있고.
+  - 집합 연산 마지막 줄에 나오는 order by는 첫번째 select 문에 명시한 칼럼으로만 선택할 할 수 있으며, 해당 칼럼이 별칭을 지정했을 경우, 별칭이 아닌 원 칼럼 이름을 쓸 경우 오류 발생.
+  
 
 - Sub query
   - 단일행 서브트리, 다중행 서브트리. 단일열 서브터리, 다중열 서브트리.
