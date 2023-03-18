@@ -107,12 +107,12 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
   - 다대다로 연결되어있을때, 이를 1대다 다대1로 풀어내기 위해 새로운 엔티티를 만들잖아 그걸 연관엔티티라 함
 
 
-- SQL 종류
-  - DDL : create, drop, alter, truncate : drop 후 create
+- SQL 종류 (sqld 시험 기준)
+  - DDL : create, drop, alter, rename, 
+    - truncate : drop 후 create. 테이블를 초기화함. 디스크자체를 완전 비움. 전체 인스턴스를 delete하는것은 디스크 안비움 즉 rollback 가능한 상태.
   - DML : select, insert, delete, update
-  - DQL : 일부에서는 DML의 select 문을 따로 분류하기도함
-  - DCL : commit, rollback, savepoint, grant, revoke
-  - TCL : 일부에서는 DCL의 commit과 rollback를 따로 분류하기도 함
+  - DCL : grant, revoke
+  - TCL : commit, rollback, savepoint
 
 
 - SQL 기본 DML
