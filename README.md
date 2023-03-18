@@ -158,8 +158,12 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
     - (on delete, on update) + (retrict, no action, cascade, set null) 조합.
     - team_id number(10) references team(team_id) on delete cascade;
     - player 테이블에 있는 필드 team_id가 team 테이블을 참조하는 FK 인데, 만약 team 테이블의 어떤 레코드를 삭제하려 할때, 참조무결성에 위배되지 않게 하기 위해 player 테이블에 있는 관련 레코드도 삭제 해버리겠다. 라는 뜻. 
-    - 옵션 안붙이거나 retrict, no action은 삭제 못하게 하겠다는뜻
-    - set null은 값을 null로 만들겠다는뜻
+    - delect(/modify) action : no action / restrict,  set null, set default, cascade
+    - insert action          : no action / dependent, set null, set default, automatic
+      - retrict, no action, dependent : 무결성에 위배되면 진행 안하겠다.
+      - set null : 무결성에 위배되는 애는 null로 바꿔버리겠다.
+      - set default : 무결성에 위배되는 애는 정해진 기본값으로 바꾸겠다
+      - cascade, automatic : 무결성이 위배되지 않게 관련된거 다 삭제, 무결성에 위배되지 않게 관련된 사항 추가.
   - alter table 테이블명 add(칼럼명 타입)
   - alter table 테이블명 drop column 칼럼명
   - alter table 테이블명 rename column 칼럼명1 to 칼럼명2
