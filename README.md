@@ -170,7 +170,8 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
 - Function
   - Lower, upper, length, substr, concat, ||, ascii, chr
   - substr("문자열", "시작위치", "길이") : 시작위치는 1부터 시작.
-  - abs, sign, celi, flood, round, trunc, power
+  - abs, sign, celi, flood, round, trunc, power.
+    - round(sal, 2) : 소수점 셋째자리에서 반올림해서 둘째짜리까지 표시해라.
   - trim(' abc ') => 'abc'
   - ltrim(' abc ') => 'abc '
   - ltrim('aabbcc', 'a') => 'bbcc'
