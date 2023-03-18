@@ -427,33 +427,31 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
     - group by cube(dname, job) : dname, job 으로 그룹 지어서 집계, dname 으로 그룹 지어서 집계, job으로 그룹 지어서 집계, 전체 집계
     - group by grouping sets(dname, job) : dname 으로 그룹 지어서 집계, job으로 그룹 지어서 집계
     - select grouping(job) : dname으로 그룹지어서 job행들이 집계가 된 결과값이면 1 아니면 0. 얘는 집계함수는 아니고 집계함수를 보기좋게 만드는 보조함수야. select절에 들어가.
-    - 최종 정리 <br> <img width="1440" alt="스크린샷 2023-03-18 오후 2 03 52" src="https://user-images.githubusercontent.com/93418349/226091844-05f35828-a206-42fa-a0ce-ac682f7d6a6a.png">
-
-                       
+    - 최종 정리 <br> <img width="1440" alt="스크린샷 2023-03-18 오후 2 03 52" src="https://user-images.githubusercontent.com/93418349/226091844-05f35828-a206-42fa-a0ce-ac682f7d6a6a.png"> <br>
   - 윈도우 함수 : 선별한 행들중 현재 행의 관계값을 구하고자 할때 사용
-        - window_function( ) over ([partition by][order by][windowing])
-        - partition by : 적용할 컬럼 명시. 약간 group by 느낌.
-        - order by : 행들을 어떤 기준으로 정렬할것인가
-        - windowing : 행들의 범위 적용.
-          - rows between N preceeding and M following : 현 행의 위로 N개행 아래로 M개행.
-          - range between N preceeding and M following : 현 행의 값의 N이상 M 이하에 포함되는 행.
-          - range unbounded preceeding : 현 행부터 맨 윗행까지. (값이 동일할 경우 동시에 반영.)
-        - window_function
-          - rank    (점수가 95, 95, 90 이라면)
-            - rank       : 1등 1등 3등
-            - dense_rank : 1등 1등 2등. 
-            - row_number : 1등 2등 3등.
-          - first_value / last_value : 각 파티션에서 가장 먼저(나중에) 나온 값
-          - lag / lead : 각 파티션에서 해당 행의 몇번째 이전(이후)의 값
-            - lag(sal) : 1개 앞행
-            - lag(sal, 2) : 2개 앞행
-            - lag(sal, 3, 0) : 3개 앞행인데 값이 없을 경우 0으로 표시
-          - ratio_to_report : 파티션 내 전체 합 값에 대한 행별 백분율. 즉 파티션내에서 내가 얼마만큼의 비율을 차지하나.
-          - percent_rank : 상위 몇 %인지. 가장 먼저가 0, 나중이 1. 동일값은 작은 백분율
-          - cume_dist : 비슷한데, 0부터 시작이 아니고, 동일값일 경우 큰 백분율로 표시
-            - 5건 일 경우, percent_rank : 0, 0.25, 0.5, 0.75, 1
-            - 5건 일 경우, cume_dist : 0.2, 0.4, 0.6, 0.8, 1
-          - ntile(x) : 파티션별로 전체 개수를 x 등분한 결과.
+      - window_function( ) over ([partition by][order by][windowing])
+      - partition by : 적용할 컬럼 명시. 약간 group by 느낌.
+      - order by : 행들을 어떤 기준으로 정렬할것인가
+      - windowing : 행들의 범위 적용.
+        - rows between N preceeding and M following : 현 행의 위로 N개행 아래로 M개행.
+        - range between N preceeding and M following : 현 행의 값의 N이상 M 이하에 포함되는 행.
+        - range unbounded preceeding : 현 행부터 맨 윗행까지. (값이 동일할 경우 동시에 반영.)
+      - window_function
+        - rank    (점수가 95, 95, 90 이라면)
+          - rank       : 1등 1등 3등
+          - dense_rank : 1등 1등 2등. 
+          - row_number : 1등 2등 3등.
+        - first_value / last_value : 각 파티션에서 가장 먼저(나중에) 나온 값
+        - lag / lead : 각 파티션에서 해당 행의 몇번째 이전(이후)의 값
+          - lag(sal) : 1개 앞행
+          - lag(sal, 2) : 2개 앞행
+          - lag(sal, 3, 0) : 3개 앞행인데 값이 없을 경우 0으로 표시
+        - ratio_to_report : 파티션 내 전체 합 값에 대한 행별 백분율. 즉 파티션내에서 내가 얼마만큼의 비율을 차지하나.
+        - percent_rank : 상위 몇 %인지. 가장 먼저가 0, 나중이 1. 동일값은 작은 백분율
+        - cume_dist : 비슷한데, 0부터 시작이 아니고, 동일값일 경우 큰 백분율로 표시
+          - 5건 일 경우, percent_rank : 0, 0.25, 0.5, 0.75, 1
+          - 5건 일 경우, cume_dist : 0.2, 0.4, 0.6, 0.8, 1
+        - ntile(x) : 파티션별로 전체 개수를 x 등분한 결과.
                        
   - Q. 부서이름, 직무, 부서의 직무별 직원수, 부서의 직무별 급여합을 구하여라
     <details>
