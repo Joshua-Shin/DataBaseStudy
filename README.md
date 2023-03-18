@@ -517,7 +517,7 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
      - for each row : 각각의 행마다 할것인가 전체로 할것인가.
 
 
-- sql 최적화 기본
+- sql 최적화 기본 (sqld 시험 범위 밖)
   - 지금까지는 어떠한 데이터를 select할것인가였는데, 여기서는 어떻게 select 할것인가. 에 대한 내용
   - optimizer, index, join 기법
   - optimizer : 규칙기반, 비용기반이 있어. 
