@@ -366,68 +366,65 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
     
 
 - Multi-Row Function
+  - 분류
+    - 그룹 함수
+      - 집계 함수 : count, sum, min, max, avg ... 
+      - 고급 집계 함수 : rollup, cube, grouping sets / + 이를 도와주는 grouping 함수
+    - 윈도우 함수
   - 집계 함수 : sum, avg, count, max, min
-  - group by로 그룹화 한것에 대해 집계를 내릴 수 있어.
-  - 연산할때 null 포함안되고, 특히 avg 구할때 분모로 안들어감
-  - group by 절이 없지만 select 문에 집계 함수가 들어간다는것은 from에 명시된 테이블을 하나의 그룹으로 본다는 의미로 해석해도 될듯
-  - **실행 순서 및 프로세스**
-    - from : 테이블 선택
-    - where : 조건에 알맞는 행들만 선택
-    - group by : 행 그룹화
-    - having : 조건에 알맞는 그룹들만 선택
-    - select : 칼럼별로 연산이 필요할 시 연산
-    - order by : 선택된 데이터들을 정렬
-  - Q. 포지션별 키의 평균을 출력하되, 해당 포지션의 키의 최대값이 190cm 이상인 경우에만 출력
-    <details>
-    <summary>정답</summary>
-    
-    ```
-    select round(avg(height), 2) 포지셔별평균키
-    from player
-    group by position
-    having max(height) >= 190;
-    ```
-  - Q. 부서이름, 직무, 부서의 직무별 직원수, 부서의 직무별 급여합을 출력하라.
-    <details>
-    <summary>정답</summary>
-    
-    ```
-    select dname, job, count(*) 직원수, sum(sal) 급여합
-    from emp join dept
-    on emp.deptno = dept.deptno
-    group by dept.dname, emp.job;
-    ```
-  - Q. 키가 가장 작은 3명의 선수를 출력하라.
-    <details>
-    <summary>정답</summary>
-    
-    ```
-    select player_name, height, rownum, orgno
-    from (select player_name, height, rownum as orgno from player order by height)
-    where rownum < 4;
-    ```
-  - Q. 키가 가장 큰 3명의 선수를 출력하라.
-    <details>
-    <summary>정답</summary>
-    
-    ```
-    select player_name, height, rownum, orgno
-    from (select player_name, height, rownum as orgno from player where height is not null order by height desc)
-    where rownum < 4;
-    ```
-  
-                     
-- Multi-Row Function (고급)
-  - 집계 함수 : rollup, cube, grouping sets + over [partition by 절][order by 절][windowing 절]
-    - rollup(칼럼1, 칼럼2) : 칼럼1 그룹핑 집계, 칼럼1+칼럼2 그룹핑 집계, 전체 그룹핑 집계
-    - cube(칼럼1, 칼럼2) : 칼럼1 그룹핑 집계, 칼럼2 그룹핑 집계, 칼럼1+칼럼2 그룹핑 집계, 전체 집계 // 모든 조합에 따라 그룹핑해서 집계
-    - grouping sets(칼럼1, 칼럼2) : 칼럼1 그룹핑 집계, 칼럼2 그룹핑 집계
-    - 주의점 : partition by, order by, windowing 절 사이사이에 습관적으로 ',' 찍지마! 
-    - grouping(칼럼) : 해당 칼럼이 그룹핑된 집계값을 나타낸 행이라면 숫자1, 아니라면 0표시. 이걸 통해 case문 작성해서 null값으로 나오는걸 조금 더 깔끔하게 표현할 수 있어.
-  - rank(), dense_rank(), row_number()
-  - windowing 절 : rows between 1 preceding and 1 following;, range between 50 preceding and 150 following;, range unbounded preceding;
-  - 행 순서 윈도우 함수 : first_value, last_value, lag, lead
-  - 비율 윈도우 함수 : ratio_to_report, percent_rank, cume_dist, ntile
+    - group by로 그룹화 한것에 대해 집계를 내릴 수 있어.
+    - 연산할때 null 포함안되고, 특히 avg 구할때 분모로 안들어감
+    - group by 절이 없지만 select 문에 집계 함수가 들어간다는것은 from에 명시된 테이블을 하나의 그룹으로 본다는 의미로 해석해도 될듯
+    - **실행 순서 및 프로세스**
+      - from : 테이블 선택
+      - where : 조건에 알맞는 행들만 선택
+      - group by : 행 그룹화
+      - having : 조건에 알맞는 그룹들만 선택
+      - select : 칼럼별로 연산이 필요할 시 연산
+      - order by : 선택된 데이터들을 정렬
+    - Q. 포지션별 키의 평균을 출력하되, 해당 포지션의 키의 최대값이 190cm 이상인 경우에만 출력
+      <details>
+      <summary>정답</summary>
+
+      ```
+      select round(avg(height), 2) 포지셔별평균키
+      from player
+      group by position
+      having max(height) >= 190;
+      ```
+    - Q. 부서이름, 직무, 부서의 직무별 직원수, 부서의 직무별 급여합을 출력하라.
+      <details>
+      <summary>정답</summary>
+
+      ```
+      select dname, job, count(*) 직원수, sum(sal) 급여합
+      from emp join dept
+      on emp.deptno = dept.deptno
+      group by dept.dname, emp.job;
+      ```
+    - Q. 키가 가장 작은 3명의 선수를 출력하라.
+      <details>
+      <summary>정답</summary>
+
+      ```
+      select player_name, height, rownum, orgno
+      from (select player_name, height, rownum as orgno from player order by height)
+      where rownum < 4;
+      ```
+    - Q. 키가 가장 큰 3명의 선수를 출력하라.
+      <details>
+      <summary>정답</summary>
+
+      ```
+      select player_name, height, rownum, orgno
+      from (select player_name, height, rownum as orgno from player where height is not null order by height desc)
+      where rownum < 4;
+      ```
+               
+  - 고급 집계 함수 : rollup, cube, grouping sets / + 이를 도와주는 grouping 함수
+                       
+  - 윈도우 함수 :
+                       
   - Q. 부서이름, 직무, 부서의 직무별 직원수, 부서의 직무별 급여합을 구하여라
     <details>
     <summary>정답</summary>
