@@ -502,18 +502,8 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
       - sort merge join : 선행테이블 정렬, 후행테이블 정렬, 그 다음에 조건에 맞게 병합. 정렬하는데 비용이 들기에 소규모 데이터에는 불리. non equi join도 가능.
       - hash join : 해쉬 함수 이용함. 대규모 데이터에 유리. equi join 에만 가능.
 
-      
-- fetch
-  - oracle 12부터 작동, order by 절 뒤에 붙음. rownum으로 페이징하는거 안해도 됨!
-  - fetch next 10 rows only; : 위에서 10개 열 보여줌
-  - offset 10 rows fetch next 10 rows only; : 위에 10개 열 스킵하고 그 다음 10개열 보여줌
-  - fetch next 10 rows with ties: : 맨 마지막열과 동률인 애들도 다 보여줌.
-  - https://rimkongs.tistory.com/158      
-      
-      
-- [정처기 공부할때 추가로 정리한거](https://github.com/Joshua-Shin/JungchugiSummary/blob/main/README.md#3%EA%B3%BC%EB%AA%A9-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EA%B5%AC%EC%B6%95)
-
-- SQL 코테 보기전에 주의할점
+-----------      
+- SQL 코테
   - 컴파일러 언어 설정이 oracle인지 mysql인지 확실히 확인!
   - 클로즈 북이면 일단 외워
     - offset 10 rows fetch next 10 rows only;
@@ -524,3 +514,11 @@ DataBase 학습을 기록하기 위한 저장소 입니다.
     - 예) asdfqwer123 -> asdfqwer0123, asdfqwer12 -> asdfqwer0012
     - A. select regexp_replace(name, '[^a-zA-Z]') || lpad(regexp_replace(name, '[^0-9]'), 4, '0') from table;
       - lpad(문자열, 전체길이, 채울문자) : 문자열이 전체 길이에 부족한 만큼 왼쪽에 채울문자를 채워줌.
+  - fetch
+    - oracle 12부터 작동, order by 절 뒤에 붙음. rownum으로 페이징하는거 안해도 됨!
+    - fetch next 10 rows only; : 위에서 10개 열 보여줌
+    - offset 10 rows fetch next 10 rows only; : 위에 10개 열 스킵하고 그 다음 10개열 보여줌
+    - fetch next 10 rows with ties: : 맨 마지막열과 동률인 애들도 다 보여줌.
+    - https://rimkongs.tistory.com/158   
+
+- [정처기 공부할때 추가로 정리한거](https://github.com/Joshua-Shin/JungchugiSummary/blob/main/README.md#3%EA%B3%BC%EB%AA%A9-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EA%B5%AC%EC%B6%95)      
